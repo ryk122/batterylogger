@@ -14,6 +14,9 @@ using System.IO;
 
     #今後の考慮
     書き込み先の検討(一括管理するなら、サーバー上DBに書けると良いね)
+
+    #開発環境
+    Visual studio 2017
  */
 
 namespace batterylogger
