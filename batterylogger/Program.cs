@@ -28,6 +28,17 @@ namespace batterylogger
     {
         static void Main(string[] args)
         {
+            //Device Name
+            string deviceName = Environment.MachineName;
+
+            //コマンドライン引数
+            string[] cmds = System.Environment.GetCommandLineArgs();
+
+            if (cmds.Length > 1)
+            {
+                deviceName = string.Copy(cmds[1]);
+            }
+
             //マシン名
             Console.WriteLine("MachineName: {0}", Environment.MachineName);
 
@@ -38,19 +49,20 @@ namespace batterylogger
             float blp = SystemInformation.PowerStatus.BatteryLifePercent;
             Console.WriteLine("バッテリー残量は、{0}%です", blp * 100);
 
-            OutputLog(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "," + (blp * 100).ToString());
+            OutputLog(deviceName, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "," + (blp * 100).ToString());
 
             //Console.ReadLine();
 
         }
 
-        static void OutputLog(string log)
+        static void OutputLog(string name, string log)
         {
             //書き込み場所
             //ネットワーク上ならネットワークの確認
             //同一ファイルに全員が書き込むなら少し考慮が必要
+            string fileDirectory = "";
             //今は{マシン名}+.csv
-            var fileName = Environment.MachineName+".csv";
+            string fileName = fileDirectory + name + ".csv";
 
             try
             {
